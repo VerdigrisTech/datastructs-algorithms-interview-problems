@@ -76,3 +76,5 @@ ssh yourfirstname@52.9.241.206
 ```
 
 This repository will be pre-cloned in your home directory.
+
+If you are on a Windows machine you will need to download the [PuTTY client](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe) to access our remote interview machine.
