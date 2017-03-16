@@ -66,3 +66,13 @@ Running the batched version should also produce the same result:
 [CIRCUIT] Verdigris HQ Elevator: 1.6 Watts @ t=7
 [CIRCUIT] Verdigris HQ Elevator: 1.3 Watts @ t=1003.5
 ```
+
+## Remote Interview
+
+If you are doing this exercise as part of our remote interview process, please SSH to the following box:
+
+```bash
+ssh yourfirstname@52.9.241.206
+```
+
+This repository will be pre-cloned in your home directory.
