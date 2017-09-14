@@ -1,6 +1,6 @@
 # Query Batching
 
-At Verdigris, we have database that stores data about our customers' electrical
+At Verdigris, we have a database that stores data about our customers' electrical
 circuits.
 
 ## Problem
