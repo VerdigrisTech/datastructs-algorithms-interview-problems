@@ -2,18 +2,27 @@
 
 'use strict';
 
-Number.prototype.toFixedDown = function(digits) {
+Number.prototype.toFixedDown = function (digits) {
   /*eslint prefer-template: "off"*/
   const re = new RegExp('(\\d+\\.\\d{' + digits + '})(\\d)');
   const m = this.toString().match(re);
   return m ? parseFloat(m[1]) : this.valueOf();
 };
 
+String.prototype.numberify = function (timestamp) {
+  let num = 0;
+  for (let i = 0; i < this.length; i++) {
+    num += this.charCodeAt(i);
+  }
+  num = num / 100;
+  return timestamp ? num + parseFloat(timestamp) : num;
+};
+
 /*Look up the power usage for a few of our circuits at key timestamps.
 
-Problem: run_all_queries() works, but it runs too slow!
+Problem: runAllQueries() works, but it runs too slow!
 
-Solution: You are to implement run_all_queries_batched().
+Solution: You are to implement runAllQueriesBatched().
           You may use the internet, stackoverflow, etc.
 
 */
@@ -45,7 +54,8 @@ class DataQuery {
       // wait
     }
 
-    return timestamps_list.map(() => (Math.random() * 10).toFixedDown(3));
+    // return timestamps_list.map(() => (Math.random() * 10).toFixedDown(3));
+    return timestamps_list.map((timestamp) => (circuit_id.numberify(timestamp)).toFixedDown(3));
   }
 }
 
@@ -62,7 +72,7 @@ const runAllQueries = allQueries => {
 const runAllQueriesBatched = allQueries => {
   /*
     TODO: Implement this function so that it gives the same
-    output as run_all_queries(), except batch up requests to avoid making
+    output as runAllQueries(), except batch up requests to avoid making
     redundant calls to DataQuery.getPowerData(). We hope that this will
     run much faster overall because the server delay is our bottleneck.
   */
