@@ -25,7 +25,8 @@ class DataQuery {
   }
 
   static getPowerData(circuit_id, timestamps_list) {
-    /*Query the server for power data on a circuit at a specific set of timestamps.
+    /*
+    Query the server for power data on a circuit at a specific set of timestamps.
 
     Parameters
       circuit_id:
@@ -37,26 +38,13 @@ class DataQuery {
       (list of float) A list of power readings corresponding to the given timestamps.
       There is one element in the list for each element in `timestamps_list`, in the same order.
       Power is returned in Watts.
-
     */
 
     // FAKE: Pretend that connecting with the server takes a long time.
-    // await sleep(1500);
-
-    // Now that we're connected, return some data!
-    // const results = [];
-    //
-    // for (t in timestamps_list)
-    //   fake_data = round(float(hash(circuit_id) % 25) + float(hash(t) % 25)) / 10.0;
-    //   // FAKE: In reality we would download this data from the server, but
-    //   // for the purpose of this question, let's just fake some data...
-    //   results.append(fake_data);
-    //
-    // return results;
-
     for (let i = 0; i < parseInt(1e9); i++) {
       // wait
     }
+
     return timestamps_list.map(() => (Math.random() * 10).toFixedDown(3));
   }
 }
