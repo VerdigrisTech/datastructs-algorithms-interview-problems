@@ -54,7 +54,7 @@ class DataQuery {
     //
     // return results;
 
-    for (var i = 0; i < 2340892342; i++) {
+    for (let i = 0; i < parseInt(1e9); i++) {
       // wait
     }
     return timestamps_list.map(() => (Math.random() * 10).toFixedDown(3));
