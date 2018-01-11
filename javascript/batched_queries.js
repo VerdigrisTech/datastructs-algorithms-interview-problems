@@ -33,22 +33,17 @@ class DataQuery {
     this.timestamp_s = timestamp_s;
   }
 
+  /**
+   * Query the server for power data on a circuit at a specific set of
+   * timestamps.
+   *
+   * @param {string} circuit_id The name of the circuit
+   * @param {number[]} timestamps_list An array of timestamps we want to query
+   * @returns {Array} An array of power readings corresponding to the given
+   * timestamps. There is one element in the list for each element in
+   * `timestamps_list`, in the same order. Power is returned in Watts.
+   */
   static getPowerData(circuit_id, timestamps_list) {
-    /*
-    Query the server for power data on a circuit at a specific set of timestamps.
-
-    Parameters
-      circuit_id:
-        (string) The name of the circuit
-      timestamps_list:
-        (list of float) A list of timestamps that we want to query
-
-    Returns
-      (list of float) A list of power readings corresponding to the given timestamps.
-      There is one element in the list for each element in `timestamps_list`, in the same order.
-      Power is returned in Watts.
-    */
-
     // FAKE: Pretend that connecting with the server takes a long time.
     for (let i = 0; i < parseInt(1e9); i++) {
       // wait
