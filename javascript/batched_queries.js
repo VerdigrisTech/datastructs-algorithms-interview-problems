@@ -18,15 +18,14 @@ String.prototype.numberify = function (timestamp) {
   return timestamp ? num + parseFloat(timestamp) : num;
 };
 
-/*Look up the power usage for a few of our circuits at key timestamps.
-
-Problem: runAllQueries() works, but it runs too slow!
-
-Solution: You are to implement runAllQueriesBatched().
-          You may use the internet, stackoverflow, etc.
-
-*/
-
+/**
+ * Look up the power usage for a few of our circuits at key timestamps.
+ *
+ * Problem: runAllQueries() works, but it runs too slow!
+ *
+ * Solution: You are to implement runAllQueriesBatched().
+ * You may use the internet, stackoverflow, etc.
+ */
 class DataQuery {
   constructor(circuit_id, timestamp_s) {
     this.circuit_id = circuit_id;
