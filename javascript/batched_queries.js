@@ -17,6 +17,10 @@ function sleep(delay) {
   });
 };
 
+/**
+ * Monkey patches String prototype with a function for generating fake data.
+ * @param {number} timestamp Timestamp in UNIX epoch
+ */
 String.prototype.numberify = function (timestamp) {
   let num = 0;
   for (let i = 0; i < this.length; i++) {
