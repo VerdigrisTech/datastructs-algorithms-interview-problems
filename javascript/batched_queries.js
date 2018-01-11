@@ -2,13 +2,6 @@
 
 'use strict';
 
-Number.prototype.toFixedDown = function (digits) {
-  /*eslint prefer-template: "off"*/
-  const re = new RegExp('(\\d+\\.\\d{' + digits + '})(\\d)');
-  const m = this.toString().match(re);
-  return m ? parseFloat(m[1]) : this.valueOf();
-};
-
 String.prototype.numberify = function (timestamp) {
   let num = 0;
   for (let i = 0; i < this.length; i++) {
@@ -46,8 +39,9 @@ class DataQuery {
    */
   static getPowerData(circuit_id, timestamps) {
     return new Promise(resolve => {
+      // Pretend each network request takes 500ms.
       setTimeout(() => {
-        const results = timestamps.map(timestamp => circuit_id.numberify(timestamp).toFixedDown(3));
+        const results = timestamps.map(timestamp => circuit_id.numberify(timestamp));
 
         // Track total network requests
         totalNetworkRequests++;
