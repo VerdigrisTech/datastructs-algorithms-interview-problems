@@ -57,17 +57,15 @@ class DataQuery {
   }
 }
 
-// const sleep = ms => { return new Promise(resolve => setTimeout(resolve, ms)); };
-
-const runAllQueries = allQueries => {
+const runAllQueries = async allQueries => {
   allQueries.forEach(query => {
     // const dataQuery = new DataQuery();
-    const results = DataQuery.getPowerData(query.circuit_id, [query.timestamp_s]);
+    const results = await DataQuery.getPowerData(query.circuit_id, [query.timestamp_s]);
     console.log(`[CIRCUIT] ${query.circuit_id}: ${results[0]} Watts @ t=${query.timestamp_s}`);
   });
 };
 
-const runAllQueriesBatched = allQueries => {
+const runAllQueriesBatched = async allQueries => {
   /*
     TODO: Implement this function so that it gives the same
     output as runAllQueries(), except batch up requests to avoid making
