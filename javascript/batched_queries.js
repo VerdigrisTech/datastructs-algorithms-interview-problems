@@ -2,6 +2,21 @@
 
 'use strict';
 
+/**
+ * A sleep function that resolves after a given delay. When used in async
+ * functions, behaves similarly to a traditional sleep function when called with
+ * `await` keyword.
+ *
+ * @param {number} delay Delay in milliseconds
+ */
+function sleep(delay) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+    }, delay);
+  });
+};
+
 String.prototype.numberify = function (timestamp) {
   let num = 0;
   for (let i = 0; i < this.length; i++) {
@@ -37,19 +52,14 @@ class DataQuery {
    * timestamps. There is one element in the list for each element in
    * `timestamps_list`, in the same order. Power is returned in Watts.
    */
-  static getPowerData(circuit_id, timestamps) {
-    return new Promise(resolve => {
-      // Pretend each network request takes 500ms.
-      setTimeout(() => {
-        const results = timestamps.map(timestamp => circuit_id.numberify(timestamp));
+  static async getPowerData(circuit_id, timestamps) {
+    // Simulate network latency of roughly 500ms.
+    await sleep(500);
 
-        // Track total network requests
-        totalNetworkRequests++;
+    // Track total network requests
+    totalNetworkRequests++;
 
-        // Resolve with results
-        resolve(results);
-      }, 500);
-    });
+    return timestamps.map(timestamp => circuit_id.numberify(timestamp));
   }
 }
 
@@ -66,7 +76,7 @@ const runAllQueriesBatched = async allQueries => {
     TODO: Implement this function so that it gives the same
     output as runAllQueries(), except batch up requests to avoid making
     redundant calls to DataQuery.getPowerData(). We hope that this will
-    run much faster overall because the server delay is our bottleneck.
+    reduce the network load on the server.
   */
 };
 
