@@ -38,19 +38,19 @@ class DataQuery {
    * timestamps.
    *
    * @param {string} circuit_id The name of the circuit
-   * @param {number[]} timestamps_list An array of timestamps we want to query
+   * @param {number[]} timestamps An array of timestamps we want to query
    * @returns {Array} An array of power readings corresponding to the given
    * timestamps. There is one element in the list for each element in
    * `timestamps_list`, in the same order. Power is returned in Watts.
    */
-  static getPowerData(circuit_id, timestamps_list) {
+  static getPowerData(circuit_id, timestamps) {
     // FAKE: Pretend that connecting with the server takes a long time.
     for (let i = 0; i < parseInt(1e9); i++) {
       // wait
     }
 
     // return timestamps_list.map(() => (Math.random() * 10).toFixedDown(3));
-    return timestamps_list.map((timestamp) => (circuit_id.numberify(timestamp)).toFixedDown(3));
+    return timestamps.map((timestamp) => (circuit_id.numberify(timestamp)).toFixedDown(3));
   }
 }
 
