@@ -57,7 +57,7 @@ const runAllQueries = async allQueries => {
   for (let i = 0; i < allQueries.length; i++) {
     const query = allQueries[i];
     const results = await DataQuery.getPowerData(query.circuit_id, [query.timestamp_s]);
-    console.log(`[CIRCUIT] ${query.circuit_id}: ${results[0]} Watts @ t=${query.timestamp_s}`);
+    console.log(`[CIRCUIT] ${query.circuit_id}: ${results[0].toFixed(2)} Watts @ t=${query.timestamp_s}`);
   }
 };
 
