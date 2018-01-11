@@ -18,6 +18,8 @@ String.prototype.numberify = function (timestamp) {
   return timestamp ? num + parseFloat(timestamp) : num;
 };
 
+let totalNetworkRequests = 0;
+
 /**
  * Look up the power usage for a few of our circuits at key timestamps.
  *
@@ -45,10 +47,10 @@ class DataQuery {
   static getPowerData(circuit_id, timestamps) {
     return new Promise(resolve => {
       setTimeout(() => {
-        const results = timestamps.map(timestamp => {
-          circuit_id.numberify(timestamp)
-            .toFixedDown(3)
-          });
+        const results = timestamps.map(timestamp => circuit_id.numberify(timestamp).toFixedDown(3));
+
+        // Track total network requests
+        totalNetworkRequests++;
 
         // Resolve with results
         resolve(results);
@@ -58,11 +60,11 @@ class DataQuery {
 }
 
 const runAllQueries = async allQueries => {
-  allQueries.forEach(query => {
-    // const dataQuery = new DataQuery();
+  for (let i = 0; i < allQueries.length; i++) {
+    const query = allQueries[i];
     const results = await DataQuery.getPowerData(query.circuit_id, [query.timestamp_s]);
     console.log(`[CIRCUIT] ${query.circuit_id}: ${results[0]} Watts @ t=${query.timestamp_s}`);
-  });
+  }
 };
 
 const runAllQueriesBatched = async allQueries => {
@@ -84,14 +86,18 @@ const queries = [
   new DataQuery('Verdigris HQ Elevator', 1003.5),
 ];
 
-let start = Date.now();
-runAllQueries(queries);
-let end = Date.now();
-console.log(`Time taken: ${end - start} ms`);
+(async function () {
+  let start = Date.now();
+  await runAllQueries(queries);
+  let end = Date.now();
+  console.log(`Time taken: ${end - start} ms`);
+  console.log(`Total network requests: ${totalNetworkRequests}`);
 
-console.log('== SOLUTION ==');
-start = Date.now();
-runAllQueriesBatched(queries);
-end = Date.now();
-console.log(`Time taken: ${end - start} ms`);
-
+  console.log('== SOLUTION ==');
+  totalNetworkRequests = 0;
+  start = Date.now();
+  await runAllQueriesBatched(queries);
+  end = Date.now();
+  console.log(`Time taken: ${end - start} ms`);
+  console.log(`Total network requests: ${totalNetworkRequests}`);
+})();
