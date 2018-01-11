@@ -44,13 +44,17 @@ class DataQuery {
    * `timestamps_list`, in the same order. Power is returned in Watts.
    */
   static getPowerData(circuit_id, timestamps) {
-    // FAKE: Pretend that connecting with the server takes a long time.
-    for (let i = 0; i < parseInt(1e9); i++) {
-      // wait
-    }
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const results = timestamps.map(timestamp => {
+          circuit_id.numberify(timestamp)
+            .toFixedDown(3)
+          });
 
-    // return timestamps_list.map(() => (Math.random() * 10).toFixedDown(3));
-    return timestamps.map((timestamp) => (circuit_id.numberify(timestamp)).toFixedDown(3));
+        // Resolve with results
+        resolve(results);
+      }, 500);
+    });
   }
 }
 
