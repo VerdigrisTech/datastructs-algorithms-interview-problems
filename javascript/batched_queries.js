@@ -9,7 +9,7 @@
  *
  * @param {number} delay Delay in milliseconds
  */
-function sleep(delay) {
+const sleep = delay => {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve();
@@ -19,9 +19,10 @@ function sleep(delay) {
 
 /**
  * Monkey patches String prototype with a function for generating fake data.
+ *
  * @param {number} timestamp Timestamp in UNIX epoch
  */
-String.prototype.numberify = function (timestamp) {
+String.prototype.numberify = timestamp => {
   let num = 0;
   for (let i = 0; i < this.length; i++) {
     num += this.charCodeAt(i);
@@ -94,7 +95,7 @@ const queries = [
   new DataQuery('Verdigris HQ Elevator', 1003.5),
 ];
 
-(async function () {
+(async () => {
   let start = Date.now();
   await runAllQueries(queries);
   let end = Date.now();
